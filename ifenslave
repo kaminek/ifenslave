@@ -108,8 +108,7 @@ for slave in "$@"; do
 		ip link set "$slave" down
 		echo "+$slave" >"/sys/class/net/$master/bonding/slaves" || error "$slave: could not add interface"
 	else
-		if [ ! -h "/sys/class/net/$master/slave_$slave" ] ||
-		   [ ! -h "/sys/class/net/$master/lower_$slave" ]; then
+		if [ ! -h "/sys/class/net/$master/lower_$slave" ]; then
 			echo "$slave: is not enslaved to $master" >&2
 			continue
 		fi
